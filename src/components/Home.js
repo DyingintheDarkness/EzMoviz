@@ -1,39 +1,36 @@
-import React,{useState, createContext} from "react"
+import React,{useContext} from "react"
 import {Link, useHistory} from "react-router-dom"
+import { QueryContext } from './QueryContext';
+import Data from "./Data"
 const Home = (props) => {
-    const [query, setQuery] = useState("Loser")
+    const {query, setQuery} = useContext(QueryContext)
     const history = useHistory();
     const handleChange = (e) => {
         setQuery(e.target.value)
         console.log(query);
-        if(query){
-            history.push("/search")
-            
-        }
+        setTimeout(() => {
+            if(query){
+                history.push("/search")
+            }
+        },500)
         
     }
     return (
         <>
+    <Link to="/search">Search</Link>
     <div className="main-container">
         <div className="header-container">
     <h1>EzMoviz</h1>
-        
-    <Link to="/search">Search</Link>
         </div>
         <div className="search-container">
     <input type="text" value={query} onChange={handleChange}/>
         </div>
         <div className="card-container">
         </div>
+        
     </div>
-    <QueryContext.Provider value={"Hello"}>
-        {props.children}
-</QueryContext.Provider>
     </>
     
     )
 }
-
-
-export const QueryContext = createContext();
 export default Home;
