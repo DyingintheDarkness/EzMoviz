@@ -1,60 +1,55 @@
 import { useContext } from "react"
 import { QueryContext } from "./QueryContext"
 import Data from "./Data"
-const Movie = (item) => {
+const Movie = ({item}) => {
+    const {title, overview, poster_path} = item
 return(<>
-<h1>{item.item.title}</h1>
+<div>
+    <img src={poster_path} alt="" srcset="" />
+    <h1>{title}</h1>
+    <p>{overview}</p>
+</div>
 </>)
 }
 const Movies = () => {
     const {data, query} = useContext(QueryContext)
-    console.log(data);
-    const items = {
-        "page": 1,
-        "results": [
-            {
-                "imdbid": "tt13570530",
-                "genre": [
-                    "Documentary"
-                ],
-                "released": 2021,
-                "title": "Salzburg. Eine Kunstgeschichte.",
-                "type": "movie"
-            },
-            {
-                "imdbid": "tt14141184",
-                "genre": [
-                    "Drama"
-                ],
-                "released": 2021,
-                "title": "Kalira Atita",
-                "type": "movie"
-            },
-            {
-                "imdbid": "tt14264308",
-                "genre": [
-                    "Animation",
-                    "Music"
-                ],
-                "released": 2021,
-                "title": "Bang Dream! Film Live 2nd Stage",
-                "type": "movie"
-            },
-            
-            
-        ]
-    }
+    localStorage.setItem("data", JSON.stringify(data))
     return (
         <>
-        {query ? <Data/>: "No Results Found"}
-        {/* {query ? items["results"].forEach(item => {
+        {/* {query ? <Data/>: "No Results Found"} */}
+        {query ? data["results"].map(item => {
             if(item.title.startsWith(query)){
-                console.log(item.title);
-                return <Movie item={item}/>
+                return <Movie item={item} key={item.id}/>
    }
-        }): ""} */}
-        
+        }
+        ): ""}
+
         </>
     )
 }
-export default Movies;
+
+const LocalMovies = () => {
+    const {query, setData, data} = useContext(QueryContext)
+    const newData = JSON.parse(localStorage.getItem("data"))
+    if(newData){
+        setData(newData)
+     } 
+     return (
+        <>
+        {query ? data["results"].map(item => {
+            if(item.title.startsWith(query)){
+                return <Movie item={item} key={item.id}/>
+            }
+        }
+        ): ""}
+
+        </>
+    )
+}
+
+export{
+    Movies,
+    LocalMovies
+}
+
+

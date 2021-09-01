@@ -1,26 +1,29 @@
 import React,{useContext, useState} from "react"
 import { QueryContext } from "./QueryContext";
 import { Link } from "react-router-dom";
-import Movies from "./Movies"
+import {Movies,LocalMovies} from "./Movies"
 const Search = (props) => {
     const {query, setQuery} = useContext(QueryContext)
-    const [hasData, setHasData] = useState(false)
+    const [hasSubmitted, setHasSubmitted] = useState(false)
     const handleChange = (e) => {
-        let val = e.target.value
-        if(val){
-            setQuery(e.target.value)
+        let value = String(e.target.value).trim()
+        if(value !== query){
+            setQuery(value)
+            setHasSubmitted(false)
         }
-    setHasData(true)
-    setTimeout(() => {
-        setHasData(false)
-    })
+    }
+    const handleSubmit =(e) => {
+        e.preventDefault()
+        setHasSubmitted(true)
     }
     return(
         <>
     <Link to="/">Home</Link>
+    <form onSubmit={handleSubmit}>
         <h1>Search</h1>
-        {hasData ? <Movies/> : ""}
-        <input type="text" value={query} onChange={handleChange} autoFocus/>
+        <input type="text" value={query} onChange={handleChange} placeholder="Search...." autoFocus/>
+        {hasSubmitted ? <Movies/>: ""}
+    </form>
         </>
     )
 
