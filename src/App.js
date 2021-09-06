@@ -4,13 +4,11 @@ import Search from "./components/Search";
 import Trending from "./components/Trending";
 import Top10 from "./components/Top10";
 import PageNotFound from "./components/PageNotFound";
-
 import { useState } from "react";
-
 import { QueryContext } from "./components/QueryContext";
-
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MovieDetails from "./components/MovieDetails";
+import MovieDownload from "./components/MovieDownload";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -22,19 +20,20 @@ function App() {
   });
   return (
     <div className="App">
+  <QueryContext.Provider
+  value={{
+    query,
+    setQuery,
+    data,
+    setData,
+    filters,
+    setFilters,
+    currentYear,
+  }}
+>
       <Router>
         <Switch>
-          <QueryContext.Provider
-            value={{
-              query,
-              setQuery,
-              data,
-              setData,
-              filters,
-              setFilters,
-              currentYear,
-            }}
-          >
+         
             <Route exact path="/">
               <Home />
             </Route>
@@ -50,13 +49,16 @@ function App() {
             <Route exact path="/movie/:id">
               <MovieDetails />
             </Route>
-            <Route path="*">
+            <Route exact path="/movie/:id/download">
+              <MovieDownload />
+            </Route>
+            <Route>
               <PageNotFound/>
             </Route>
-
-          </QueryContext.Provider>
+            
         </Switch>
       </Router>
+          </QueryContext.Provider>
     </div>
   );
 }

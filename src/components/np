@@ -1,0 +1,45 @@
+import React, { useContext, useState, useEffect } from "react";
+import { QueryContext } from "./QueryContext";
+import { useParams, useHistory,  Link} from "react-router-dom";
+import PageNotFound from "./PageNotFound";
+
+const MovieDetails = () => {
+  let { id } = useParams();
+  // id = parseInt(id)
+  const { data } = useContext(QueryContext);
+  const history = useHistory()
+
+  return (
+    <>
+      {
+      data.map((item) => {
+        if (item.id === id) {
+        const { title, release_date, overview } = item;
+        let d = new Date(release_date * 1000);
+        let date = `${d.getDay()} ${d.toLocaleString("en-us", {
+          month: "long",
+        })} ${d.getFullYear()}`;
+        return (
+          <>
+            <h1>{id}</h1>
+            <h2>{title}</h2>
+            <p>{overview}</p>
+            <h2>{date}</h2>
+            <button>
+              <Link to={`${id}/download`}>
+              Download
+              </Link>
+              </button>
+          </>
+        );
+      }
+      
+    }  
+    )
+  }
+</>    
+  );
+
+};
+
+export default MovieDetails;

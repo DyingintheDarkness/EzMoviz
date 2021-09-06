@@ -30,6 +30,7 @@ const Home = () => {
         </div>
         <div className="search-container">
     <input type="text" value={query} onChange={handleChange}/>
+    <button>Lol</button>
         </div>
         <div className="card-container">
             <RenderedMovies/>
