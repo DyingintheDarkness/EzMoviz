@@ -1,23 +1,29 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect, useContext} from 'react';
 import {useParams} from "react-router-dom"
+import { QueryContext } from './QueryContext';
 
 function MovieDownload() {
-const {id} = useParams()
+const {id,flag, token} = useParams()
+const {generatedToken, setGeneratedToken} = useContext(QueryContext)
 const [seconds, setSeconds] = useState(10)
+const [validToken, setValidToken] = useState(false)
 const [downloadLink, setDownloadLink] = useState("")
+if(token === generatedToken){
+setValidToken(true)
+}
 
 useEffect(() => {
-    if (seconds > 0) {
-        setTimeout(() => setSeconds(seconds - 1), 1000);
-      } else {
-        setSeconds(0);
-      }
+    // if (seconds > 0) {
+    //     setTimeout(() => setSeconds(seconds - 1), 1000);
+    //   } else {
+    //     setSeconds(0);
+    //   }
+
 
 })
     return (
         <div>
-            {seconds}
-            <a href="https://c.tenor.com/Z6gmDPeM6dgAAAAC/dance-moves.gif" download>Download</a>
+            {validToken ? "You can download" : "Download From Original Site"}
         </div>
     );
 }

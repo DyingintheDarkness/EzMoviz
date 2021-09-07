@@ -13,6 +13,9 @@ import MovieDownload from "./components/MovieDownload";
 function App() {
   const [query, setQuery] = useState("");
   const [data, setData] = useState([]);
+  const [flag, setFlag] = useState(false);
+  const [currentItem, setCurrentItem] = useState({});
+  const [generatedToken, setGeneratedToken] = useState("")
   const currentYear = new Date().getFullYear();
   const [filters, setFilters] = useState({
     year: currentYear,
@@ -29,6 +32,12 @@ function App() {
     filters,
     setFilters,
     currentYear,
+    flag,
+    setFlag,
+    generatedToken,
+    setGeneratedToken,
+    currentItem,
+    setCurrentItem
   }}
 >
       <Router>
@@ -49,7 +58,7 @@ function App() {
             <Route exact path="/movie/:id">
               <MovieDetails />
             </Route>
-            <Route exact path="/movie/:id/download">
+            <Route exact path="/movie/:id/:token/download">
               <MovieDownload />
             </Route>
             <Route>
