@@ -1,17 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
 import { QueryContext } from "./QueryContext";
-import { useParams, useHistory} from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import Data from "./Data";
 import PageNotFound from "./PageNotFound";
-import uniqid from 'uniqid';
-
+import uniqid from "uniqid";
 
 const MovieDetails = () => {
-  // id = parseInt(id)
-  const { data,flag,setFlag,setCurrentItem } = useContext(QueryContext);
+  const [hasLoaded, setHasLoaded] = useState(false)
+  const { data, flag, setFlag, setCurrentItem, setGeneratedToken } =
+    useContext(QueryContext);
   let { id } = useParams();
-  
+
   useEffect(() => {
+    setHasLoaded(true)
     const dataLength = Object.keys(data).length;
     try {
       if (data && dataLength !== 0) {
@@ -19,6 +20,7 @@ const MovieDetails = () => {
           let item = Object(data)[i];
           if (parseInt(item.id) === parseInt(id)) {
             setCurrentItem(item);
+            setGeneratedToken(uniqid());
             setFlag(true);
             break;
           } else {
@@ -31,11 +33,11 @@ const MovieDetails = () => {
     } catch (err) {
       console.log(err);
     }
-  }, [id, data]);
-  
+  }, [id, data, setCurrentItem, setFlag, setGeneratedToken]);
+
   return (
     <>
-      <Data />
+      {hasLoaded ? <Data/> :  "Loading"}
       {flag ? <Item /> : <PageNotFound />}
     </>
   );
@@ -43,19 +45,21 @@ const MovieDetails = () => {
 
 const Item = () => {
   const history = useHistory();
-  const {generatedToken, setGeneratedToken, currentItem} = useContext(QueryContext)
+  const { generatedToken, currentItem } = useContext(QueryContext);
   const { id, release_date, title, overview } = currentItem;
   const handleClick = (e) => {
-    setGeneratedToken("ok")
-    console.log("Token:" + generatedToken);
-    history.push(`${id}/${generatedToken}/download`)
-  }
+    history.push(`${id}/${generatedToken}/download`);
+  };
+  const releaseYear = new Date(
+    release_date * 1000
+  ).getFullYear();  
   return (
     <>
       <h1>{id}</h1>
       <h2>{title}</h2>
-      <h3>{release_date}</h3>
+      <h1>{releaseYear}</h1>
       <p>{overview}</p>
+
       <button onClick={handleClick}>Download</button>
     </>
   );

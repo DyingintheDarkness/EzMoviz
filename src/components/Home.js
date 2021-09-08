@@ -1,9 +1,12 @@
-import React,{useContext} from "react"
+import React,{useContext,useEffect,useState} from "react"
 import {Link, useHistory} from "react-router-dom"
 import { QueryContext } from './QueryContext';
 import { RenderedMovies } from "./Movies";
+import Data from "./Data";
 const Home = () => {
     const {query, setQuery} = useContext(QueryContext)
+    const [hasLoaded, setHasLoaded] = useState(false)
+
     const history = useHistory();
     const handleChange = (e) => {
         setQuery(e.target.value)
@@ -15,8 +18,13 @@ const Home = () => {
         },500)
         
     }
+
+  useEffect(()=> {
+    setHasLoaded(true)}
+  ,[])
     return (
         <>
+        {hasLoaded ? <Data/> :  "Loading"}
         <nav>
     <Link to="/search">Search</Link>
     <Link to="/">Home</Link>
@@ -35,7 +43,7 @@ const Home = () => {
         <div className="card-container">
             <RenderedMovies/>
         </div>
-        
+
     </div>
     </>
     

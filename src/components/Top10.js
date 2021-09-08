@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Top10() {
+const Top10 = () => {
     
     return (
         <div>
