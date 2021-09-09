@@ -8,23 +8,18 @@ import Filters from "./Filters"
 const Search = (props) => {
   const { query, setQuery} = useContext(QueryContext);
   const [hasLoaded, setHasLoaded] = useState(false)
-  const handleChange = (e) => {
-    setQuery(e.target.value);
-  };
-  
   useEffect(()=> {
     setHasLoaded(true)}
   ,[])
   return (
     <>
-          {hasLoaded ? <Data/> :  "Loading"}
-
+      {hasLoaded ? <Data/> :  "Loading"}
       <Link to="/">Home</Link>   
         <h1>Search</h1>
         <input
           type="text"
           value={query}
-          onChange={handleChange}
+          onChange={(e) => setQuery(e.target.value)}
           placeholder="Search...."
           autoFocus
         />

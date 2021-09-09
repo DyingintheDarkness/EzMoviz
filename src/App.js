@@ -1,8 +1,7 @@
-import "./App.css";
 import Home from "./components/Home";
 import Search from "./components/Search";
 import Trending from "./components/Trending";
-import Top10 from "./components/Top10";
+import NewReleases from "./components/NewReleases";
 import PageNotFound from "./components/PageNotFound";
 import { useState } from "react";
 import { QueryContext } from "./components/QueryContext";
@@ -53,8 +52,8 @@ const App = () => {
             <Route exact path="/search">
               <Search />
             </Route>
-            <Route exact path="/top-10">
-              <Top10 />
+            <Route exact path="/new-releases">
+              <NewReleases />
             </Route>
             <Route exact path="/trending">
               <Trending />

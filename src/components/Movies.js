@@ -67,22 +67,24 @@ const RenderedMovies = (props) => {
 
   return (
     <>
+    <div>
+
     {data.map((item) => {
-            const releaseYear = new Date(
-              item.release_date * 1000
-            ).getFullYear();
-            if (
-              releaseYear === currentYear ||
-              releaseYear === currentYear - 1
-            ) {
-              return <Movie item={item} key={item.id} />;
-            }
-          })
-        }
+     let releaseYear = new Date(item.release_date * 1000).getFullYear()
+
+     if (
+         releaseYear === currentYear - 1 ||
+         releaseYear === currentYear - 2
+       ) {
+         return <Movie item={item} key={item.id} />;
+       }
+    })
+  }
+  </div>
 
 
     </>
   );
 };
 
-export { Movies, RenderedMovies };
+export { Movies, RenderedMovies,Movie };
