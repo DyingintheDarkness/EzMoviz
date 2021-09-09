@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from 'react';
-import fileDownload from 'js-file-download'
 import { saveAs } from "file-saver";
 const DownloadPage = () => {
 const [seconds, setSeconds] = useState(10)
