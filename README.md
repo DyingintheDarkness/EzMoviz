@@ -1,10 +1,10 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# MovieDB
+#### It's a Movie Search Web App users can use to view a specific movie details and also use search filters to find the movie they want filtered out by year and genre.
+#### It is made with React which uses Tailwind CSS for styling.
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory , you can run:
 
 ### `yarn start`
 
