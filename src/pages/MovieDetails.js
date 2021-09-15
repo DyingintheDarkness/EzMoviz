@@ -56,6 +56,9 @@ const Item = () => {
   let date = `${d.getDay()} ${d.toLocaleString("en-us", {
     month: "long",
   })} ${d.getFullYear()}`;
+  useEffect(() => {
+document.title = `MovieDB - ${title}`
+  },[])
   return (
     <div className="flex flex-col items-center md:mb-16">
       <div className="flex flex-col items-center">

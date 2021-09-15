@@ -10,6 +10,7 @@ const Search = (props) => {
   const [hasLoaded, setHasLoaded] = useState(false);
   useEffect(() => {
     setHasLoaded(true);
+    document.title = "MovieDB";
   }, []);
   return (
     <>

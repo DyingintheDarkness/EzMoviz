@@ -21,6 +21,7 @@ const Home = () => {
 
   useEffect(() => {
     setHasLoaded(true);
+    document.title = "MovieDB";
   }, []);
   return (
     <>

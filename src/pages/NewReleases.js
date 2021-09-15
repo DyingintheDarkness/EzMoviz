@@ -10,6 +10,7 @@ const NewReleases = () => {
 
   useEffect(() => {
     setHasLoaded(true);
+    document.title = "MovieDB";
   }, []);
   return (
     <>

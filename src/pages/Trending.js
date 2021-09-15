@@ -11,6 +11,7 @@ const Trending = () => {
   useEffect(() => {
     setHasLoaded(true);
     setTrendingMovies(data.slice(10, 20));
+    document.title = "MovieDB";
   }, [data]);
   return (
     <div className="flex flex-col items-center w-full gap-3 mt-2 mb-10">

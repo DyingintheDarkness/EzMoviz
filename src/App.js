@@ -10,6 +10,7 @@ import MovieDetails from "./pages/MovieDetails";
 import MovieDownload from "./pages/MovieDownload";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { useEffect } from "react";
 
 const App = () => {
   const [query, setQuery] = useState("");
@@ -23,7 +24,6 @@ const App = () => {
     year: "",
     genre: "",
   });
-
   return (
     <QueryContext.Provider
       value={{
