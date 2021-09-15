@@ -1,32 +1,27 @@
-import React, { useContext, useState,useEffect } from "react";
-import Data from "./Data"
+import React, { useContext, useState, useEffect } from "react";
+import Data from "./Data";
 import { Movie } from "./Movies";
 import { QueryContext } from "./QueryContext";
 const Trending = () => {
-    const { data } = useContext(QueryContext);
-    const [trendingMovies, setTrendingMovies] = useState([])
-    const [hasLoaded, setHasLoaded] = useState(false)
+  const { data } = useContext(QueryContext);
+  const [trendingMovies, setTrendingMovies] = useState([]);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
-    useEffect(()=> {
-        setHasLoaded(true)
-        setTrendingMovies(data.slice(10,20))
-    }
-    ,[data]
-    )
-    console.log(trendingMovies);
-    return (
-        <div>
-            {hasLoaded ? <Data/> :  "Loading"}
-            
-            {data.length}
-            <br/>
-            {trendingMovies.length}
-{trendingMovies.map(item => {
-    return <Movie item={item} key={item.id}/>
-})}
-        
+  useEffect(() => {
+    setHasLoaded(true);
+    setTrendingMovies(data.slice(10, 20));
+  }, [data]);
+  return (
+    <div className="flex flex-col items-center w-full gap-3 mt-2 mb-10">
+      {hasLoaded ? <Data /> : "Loading"}
+      <h1 className="font-main text-4xl font-bold">Trending Movies</h1>
+      <div className="flex flex-col md:flex-row md:flex-wrap md:justify-evenly md:self-center gap-3">
+      {trendingMovies.map((item) => {
+          return <Movie item={item} key={item.id} />;
+        })}
         </div>
-    )
-}
+    </div>
+  );
+};
 
 export default Trending;
