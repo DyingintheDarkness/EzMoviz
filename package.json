@@ -1,5 +1,7 @@
 {
-  "name": "ezmoviz",
+  "name": "moviedb",
+  "author": "DyingintheDarkness @github",
+  "repository": "https://github.com/DyingintheDarkness/MovieDB",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

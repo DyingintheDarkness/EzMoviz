@@ -1,20 +1,20 @@
-import Home from "./components/Home";
-import Search from "./components/Search";
-import Trending from "./components/Trending";
-import NewReleases from "./components/NewReleases";
-import PageNotFound from "./components/PageNotFound";
+import Home from "./pages/Home";
+import Search from "./pages/Search";
+import Trending from "./pages/Trending";
+import NewReleases from "./pages/NewReleases";
+import PageNotFound from "./pages/PageNotFound";
 import { useState } from "react";
 import { QueryContext } from "./components/QueryContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import MovieDetails from "./components/MovieDetails";
-import MovieDownload from "./components/MovieDownload";
+import MovieDetails from "./pages/MovieDetails";
+import MovieDownload from "./pages/MovieDownload";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 const App = () => {
   const [query, setQuery] = useState("");
   const [data, setData] = useState([]);
-  const [flag, setFlag] = useState(false);
+  const [flag, setFlag] = useState(null);
   const [currentItem, setCurrentItem] = useState({});
   const [generatedToken, setGeneratedToken] = useState("");
   const [useFilters, setUseFilters] = useState(false);
@@ -69,7 +69,7 @@ const App = () => {
             <PageNotFound />
           </Route>
         </Switch>
-          <Footer/>
+        <Footer />
       </Router>
     </QueryContext.Provider>
   );

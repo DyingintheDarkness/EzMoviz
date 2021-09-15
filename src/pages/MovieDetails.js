@@ -1,34 +1,36 @@
 import React, { useContext, useState, useEffect } from "react";
-import { QueryContext } from "./QueryContext";
+import { QueryContext } from "../components/QueryContext";
 import { useParams, useHistory } from "react-router-dom";
-import Data from "./Data";
+import Data from "../components/Data";
 import PageNotFound from "./PageNotFound";
 import uniqid from "uniqid";
+import Loading from "../components/Loading";
 
 const MovieDetails = () => {
   const [hasLoaded, setHasLoaded] = useState(false);
   const { data, flag, setFlag, setCurrentItem, setGeneratedToken } =
     useContext(QueryContext);
   let { id } = useParams();
-
   useEffect(() => {
     setHasLoaded(true);
     const dataLength = Object.keys(data).length;
     try {
-      if (data && dataLength !== 0) {
-        for (let i = 0; i <= dataLength; i++) {
-          let item = Object(data)[i];
-          if (parseInt(item.id) === parseInt(id)) {
-            setCurrentItem(item);
-            setGeneratedToken(uniqid());
-            setFlag(true);
-            break;
-          } else {
-            setFlag(false);
+      if (isNaN(id) === false) {
+        if (data && dataLength !== 0) {
+          for (let i = 0; i <= dataLength; i++) {
+            let item = Object(data)[i];
+            if (parseInt(item.id) === parseInt(id)) {
+              setCurrentItem(item);
+              setGeneratedToken(uniqid());
+              setFlag(true);
+              break;
+            } else {
+              setFlag(false);
+            }
           }
+        } else {
+          setFlag(false);
         }
-      } else {
-        setFlag(false);
       }
     } catch (err) {
       console.log(err);
@@ -37,7 +39,7 @@ const MovieDetails = () => {
 
   return (
     <div className="mb-10 mt-10">
-      {hasLoaded ? <Data /> : "Loading"}
+      {hasLoaded ? <Data /> : <Loading />}
       {flag ? <Item /> : <PageNotFound />}
     </div>
   );

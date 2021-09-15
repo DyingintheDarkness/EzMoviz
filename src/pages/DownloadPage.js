@@ -20,7 +20,7 @@ const DownloadPage = () => {
     saveAs(download.link, download.fileName);
   };
   return (
-    <div className="mt-10 flex flex-col items-center p-2 gap-20">
+    <div className="mt-10 flex flex-col items-center p-2 gap-20 md:gap-40 md:mt-20">
       <div className="flex flex-col items-center gap-4">
         <h2 className="font-bold text-2xl md:text-5xl md:p-3 border-4 border-blue-500 p-5 text-center w-20 rounded-full shadow-md">
           {seconds}
@@ -35,7 +35,7 @@ const DownloadPage = () => {
       </div>
       <p className="text-sm font-medium md:text-lg">
         Do not refresh the page please wait till the countdown is over.
-        <br/>
+        <br />
         If you are facing any issues please download from original web site.
       </p>
     </div>

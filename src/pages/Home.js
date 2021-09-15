@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { QueryContext } from "./QueryContext";
-import { RenderedMovies } from "./Movies";
-import Data from "./Data";
+import { QueryContext } from "../components/QueryContext";
+import { RenderedMovies } from "../components/Movies";
+import Data from "../components/Data";
+import Loading from "../components/Loading";
 
 const Home = () => {
   const { query, setQuery } = useContext(QueryContext);
@@ -11,7 +12,6 @@ const Home = () => {
   const history = useHistory();
   const handleChange = (e) => {
     setQuery(e.target.value);
-    console.log(query);
     setTimeout(() => {
       if (query) {
         history.push("/search");
@@ -24,7 +24,7 @@ const Home = () => {
   }, []);
   return (
     <>
-      {hasLoaded ? <Data /> : "Loading"}
+      {hasLoaded ? <Data /> : <Loading />}
       <div className="flex items-center justify-center mt-20 w-full">
         <input
           type="text"
