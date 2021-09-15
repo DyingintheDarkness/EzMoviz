@@ -1,6 +1,6 @@
 # MovieDB
 #### It's a Movie Search Web App users can use to view a specific movie details and also use search filters to find the movie they want filtered out by year and genre.
-#### It is made with React which uses Tailwind CSS for styling.
+#### It is made with React and uses Tailwind CSS for styling.
 
 ## Available Scripts
 
