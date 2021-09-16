@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Movies, RenderedMovies } from "../components/Movies";
 import Data from "../components/Data";
 import Filters from "../components/Filters";
-
+import Loading from "../components/Loading";
 const Search = (props) => {
   const { query, setQuery } = useContext(QueryContext);
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -14,7 +14,7 @@ const Search = (props) => {
   }, []);
   return (
     <>
-      {hasLoaded ? <Data /> : "Loading"}
+      {hasLoaded ? <Data /> : <Loading/>}
 
       <div className="flex flex-col items-center mt-10">
         <div className="flex flex-col gap-1 md:w-2/3">
